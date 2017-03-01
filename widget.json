@@ -1,0 +1,15 @@
+{
+	"id": "com.netsmartcompany.AlloyBalloonPop",
+	"name": "AlloyBalloonPop",
+	"description" : "",
+	"author": "kgividen",
+	"version": "1.0",
+	"copyright":"Copyright (c) 2017",
+	"license":"Public Domain",
+	"min-alloy-version": "1.0",
+	"min-titanium-version":"2.1",
+	"tags":"balloon",
+	"platforms":"android,ios",
+	"modules": {
+	}
+}

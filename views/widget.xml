@@ -1,0 +1,5 @@
+<Alloy>
+    <View id="balloonsView" backgroundColor="white">
+        <!-- <ImageView id="balloonsBackgroundImage" platform="android"></ImageView> -->
+    </View>
+</Alloy>

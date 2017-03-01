@@ -1,0 +1,18 @@
+"#balloonsView[platform=ios]" : {
+	backgroundImage:"/images/sky-with-clouds.png"
+}
+
+"#balloonsBackgroundImage[platform=android]" : {
+	 image:"/images/sky-with-clouds.png",
+	 height:Ti.UI.FILL, 
+	 width:Ti.UI.FILL
+}
+
+".balloons" : {
+	top:5,
+	width:50,
+	height:176,
+	duration:400, // in milliseconds, the time before next frame is shown
+	repeatCount:1,  // 0 means animation repeats indefinitely, use > 1 to control repeat count
+	zIndex:50
+}
