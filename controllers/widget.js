@@ -25,9 +25,9 @@ var balloonImages =
 // $.container.top = args.top || 10;
 var currentValueOnColor = _.has(args, 'currentValueOnColor') ? args.currentValueOnColor : "black";
 
-function resetBalloons(){
+function resetBalloons(next){
 	balloons = [];
-	addBalloonsToView();
+	next && next();
 }
 
 function popBalloon(i, next){
@@ -86,10 +86,11 @@ function popAllBalloons(next){
 	next && next();
 }
 
-function floatAllBalloons(){
+function floatAllBalloons(next){
 	for(var i=0; i < balloons.length; i++) {	
 		floatABalloon(i);
 	}
+	next && next();
 }
 
 function addBalloons(numOfBalloons, next){
@@ -122,3 +123,4 @@ exports.popAllBalloons = popAllBalloons;
 exports.popABalloon = popABalloon;
 exports.floatAllBalloons = floatAllBalloons;
 exports.addBalloons = addBalloons;
+exports.resetBalloons = resetBalloons;
