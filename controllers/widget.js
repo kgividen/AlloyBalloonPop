@@ -79,11 +79,32 @@ function popABalloon(next){
 		popBalloon(0, next);	
 	}
 }
-function popAllBalloons(next){
+
+function popAllBalloonsTogether(next){
 	for(var i=0; i < balloons.length; i++) {	
-		popBalloon(i);
+		if( i < balloons.length - 1 ) {
+			popBalloon(i);
+		} else {
+			popBalloon(i, next);
+		}
 	}
-	next && next();
+}
+
+function popAllBalloonsConsecutively(next){
+	function pop(i, next) {
+		if( i < balloons.length ) {
+	    	popBalloon(i, function(err) {
+	      		if ( err ) {
+	        		Ti.API.info('error: ' + err);
+	      		} else {
+	        		pop(i+1, next);
+	      		}
+	    	})
+	  	} else {
+		  	next && next();
+	  	}
+	}
+	pop(0, next);
 }
 
 function floatAllBalloons(next){
@@ -119,7 +140,8 @@ function addBalloons(numOfBalloons, next){
 }
 
 //Exports
-exports.popAllBalloons = popAllBalloons;
+exports.popAllBalloonsTogether = popAllBalloonsTogether;
+exports.popAllBalloonsConsecutively = popAllBalloonsConsecutively;
 exports.popABalloon = popABalloon;
 exports.floatAllBalloons = floatAllBalloons;
 exports.addBalloons = addBalloons;
