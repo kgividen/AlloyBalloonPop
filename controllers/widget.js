@@ -81,7 +81,11 @@ function popABalloon(next){
 }
 
 function popAllBalloonsTogether(next){
-	for(var i=0; i < balloons.length; i++) {	
+	if(balloons.length < 1){  //If there aren't any balloons to pop just return
+		return next && next();	
+	}
+	for(var i=0; i < balloons.length; i++) {
+		Ti.API.info("balloons.lenght: " + balloons.length + " i: " + i);	
 		if( i < balloons.length - 1 ) {
 			popBalloon(i);
 		} else {
