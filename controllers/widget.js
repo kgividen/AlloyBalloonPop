@@ -119,7 +119,7 @@ function floatAllBalloons(next){
 }
 
 function addBalloons(numOfBalloons, next){
-	var t = "15"; //set first balloon in the middle
+	var t = "1"; //set first balloon in the middle
 	var l = "45";//set first balloon in the middle
 
 	for(var i=0; i < numOfBalloons; i++) {	
@@ -135,7 +135,7 @@ function addBalloons(numOfBalloons, next){
 		balloon.setLeft(left);
 		balloon.setTop(top);
 		l = _.random(5,80); //This will be x% of the width of the device
-		t = _.random(5,25); //This will be x% of the height of the device to start placing balloons
+		t = _.random(2,25); //This will be x% of the height of the device to start placing balloons
 		$.balloonsView.add(balloon);
 		balloons.push(balloon);
 	}
