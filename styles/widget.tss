@@ -1,12 +1,4 @@
-"#balloonsView[platform=ios]" : {
-	backgroundImage:"/images/sky-with-clouds.png"
-}
-
-"#balloonsBackgroundImage[platform=android]" : {
-	 image:"/images/sky-with-clouds.png",
-	 height:Ti.UI.FILL, 
-	 width:Ti.UI.FILL
-}
+"#balloonsView" : {}
 
 ".balloons" : {
 	top:5,

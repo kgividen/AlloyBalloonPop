@@ -23,7 +23,15 @@ var balloonImages =
 	};
 
 // $.container.top = args.top || 10;
-var currentValueOnColor = _.has(args, 'currentValueOnColor') ? args.currentValueOnColor : "black";
+var zIndex = _.has(args, 'zIndex') ? args.zIndex : 0;
+var opacity = _.has(args, 'opacity') ? args.opacity : 1.0;
+var top = _.has(args, 'top') ? args.top : "30%";
+var left = _.has(args, 'left') ? args.left : "50%";
+var popDuration = _.has(args, 'popDuration') ? args.popDuration : 400;
+var floatBalloonDuration = _.has(args, 'floatBalloonDuration') ? args.floatBalloonDuration : 3000;
+
+$.balloonsView.zIndex = zIndex;
+$.balloonsView.opacity = opacity;
 
 function resetBalloons(next){
 	balloons = [];
@@ -42,17 +50,17 @@ function popBalloon(i, next){
 	balloons[i].setZIndex(100);
 	//move the balloon closer to the middle since if it pops in place you can't see it  
 	var a = Ti.UI.createAnimation({
-	  	top:"30%",
-	  	left: "50%",
+	  	top:top,
+	  	left: left,
 	    transform : matrix,
-	    duration : 750,
+	    duration : popDuration,
 	    repeat : 1
  	});
 	  
 	//pop the balloon and then fade it out to nothing
 	balloons[i].animate(a, function(){
 		balloons[i].image=WPATH(BALLOON_IMG_LOC + balloonImages[bColor].imagePop);	
-	  	animation.fadeOut(balloons[i],400, function(){
+	  	animation.fadeOut(balloons[i],popDuration, function(){
 	  		$.balloonsView.remove(balloons[i]);
 	  		balloons.splice(0,1); //remove the balloon from the array
 			next && next();
@@ -63,7 +71,7 @@ function popBalloon(i, next){
 function floatABalloon(i, next){
 	var a = Ti.UI.createAnimation({
 	  	top:"-100%",
-	    duration : 3000,
+	    duration : floatBalloonDuration,
 	    zIndex:100,
 	    repeat : 1
  	});
@@ -85,7 +93,6 @@ function popAllBalloonsTogether(next){
 		return next && next();	
 	}
 	for(var i=0; i < balloons.length; i++) {
-		Ti.API.info("balloons.lenght: " + balloons.length + " i: " + i);	
 		if( i < balloons.length - 1 ) {
 			popBalloon(i);
 		} else {
@@ -103,7 +110,7 @@ function popAllBalloonsConsecutively(next){
 	      		} else {
 	        		pop(i+1, next);
 	      		}
-	    	})
+	    	});
 	  	} else {
 		  	next && next();
 	  	}
