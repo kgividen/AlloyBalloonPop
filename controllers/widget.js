@@ -22,11 +22,11 @@ var balloonImages =
 		{ color:'yellow', image:'yellow.png',imagePop:'yellowPop.png'}
 	};
 
-// $.container.top = args.top || 10;
 var zIndex = _.has(args, 'zIndex') ? args.zIndex : 0;
 var opacity = _.has(args, 'opacity') ? args.opacity : 1.0;
-var top = _.has(args, 'top') ? args.top : "30%";
-var left = _.has(args, 'left') ? args.left : "50%";
+var topPopLocation = _.has(args, 'top') ? args.topPopLocation : "30%";
+var leftPopLocation = _.has(args, 'left') ? args.leftPopLocation : "40%";
+var edge = _.has(args, 'edge') ? args.edge : 0; //This is if you want to place balloons around the edge
 var popDuration = _.has(args, 'popDuration') ? args.popDuration : 400;
 var floatBalloonDuration = _.has(args, 'floatBalloonDuration') ? args.floatBalloonDuration : 3000;
 
@@ -50,8 +50,8 @@ function popBalloon(i, next){
 	balloons[i].setZIndex(100);
 	//move the balloon closer to the middle since if it pops in place you can't see it  
 	var a = Ti.UI.createAnimation({
-	  	top:top,
-	  	left: left,
+	  	top: topPopLocation,
+	  	left: leftPopLocation,
 	    transform : matrix,
 	    duration : popDuration,
 	    repeat : 1
@@ -141,7 +141,17 @@ function addBalloons(numOfBalloons, next){
 		var top = t + "%";
 		balloon.setLeft(left);
 		balloon.setTop(top);
-		l = _.random(5,80); //This will be x% of the width of the device
+		if(edge) {
+			//every other one lets put one on the left and one on the right.
+			if(i % 2) {
+				l = _.random(5,edge); 
+			} else {
+				var r = 90 - edge;
+				l = _.random(r,90); //go to the right side
+			}
+		} else {
+			l = _.random(5,80); //This will be x% of the width of the device	
+		}
 		t = _.random(2,25); //This will be x% of the height of the device to start placing balloons
 		$.balloonsView.add(balloon);
 		balloons.push(balloon);
