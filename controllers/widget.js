@@ -24,8 +24,10 @@ var balloonImages =
 
 var zIndex = _.has(args, 'zIndex') ? args.zIndex : 0;
 var opacity = _.has(args, 'opacity') ? args.opacity : 1.0;
-var topPopLocation = _.has(args, 'top') ? args.topPopLocation : "30%";
-var leftPopLocation = _.has(args, 'left') ? args.leftPopLocation : "40%";
+var topStartLocation = _.has(args, 'topStartLocation') ? args.topStartLocation : "1";
+var leftStartLocation = _.has(args, 'leftStartLocation') ? args.leftStartLocation : "45";
+var topPopLocation = _.has(args, 'topPopLocation') ? args.topPopLocation : "30%";
+var leftPopLocation = _.has(args, 'leftPopLocation') ? args.leftPopLocation : "40%";
 var edge = _.has(args, 'edge') ? args.edge : 0; //This is if you want to place balloons around the edge
 var popDuration = _.has(args, 'popDuration') ? args.popDuration : 400;
 var floatBalloonDuration = _.has(args, 'floatBalloonDuration') ? args.floatBalloonDuration : 3000;
@@ -126,8 +128,8 @@ function floatAllBalloons(next){
 }
 
 function addBalloons(numOfBalloons, next){
-	var t = "1"; //set first balloon in the middle
-	var l = "45";//set first balloon in the middle
+	var t = topStartLocation; //set first balloon in the middle
+	var l = leftStartLocation;//set first balloon in the middle
 
 	for(var i=0; i < numOfBalloons; i++) {	
 		var randomBalloon = _.sample(balloonImages);
@@ -144,10 +146,10 @@ function addBalloons(numOfBalloons, next){
 		if(edge) {
 			//every other one lets put one on the left and one on the right.
 			if(i % 2) {
-				l = _.random(5,edge); 
+				l = _.random(1,edge); 
 			} else {
-				var r = 90 - edge;
-				l = _.random(r,90); //go to the right side
+				var r = 85 - edge;
+				l = _.random(r,85); //go to the right side
 			}
 		} else {
 			l = _.random(5,80); //This will be x% of the width of the device	
